@@ -54,16 +54,17 @@ jobs:
         - name: Push to Docker Hub Backend 
           uses: docker/build-push-action@v2 
           with:
-            
+            file: backend/Dockerfile
             push: true
             tags: kolosovdv/backend1:latest
-            #file: backend/Dockerfile
+            
         - name: Push to Docker Hub Frontend
           uses: docker/build-push-action@v2
           with:
-            
+            file: frontend/Dockerfile
             push: true
             tags: kolosovdv/frontend:latest
+          
   deploy:
     runs-on: ubuntu-latest
     needs: build_and_push_to_docker_hub
