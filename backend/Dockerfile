@@ -2,7 +2,6 @@ FROM python:3.7-slim
 
 WORKDIR /app
 
-# Скопировать с локального компьютера файл зависимостей
 # в директорию /app.
 COPY backend/requirements.txt .
 
