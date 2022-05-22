@@ -5,7 +5,7 @@ WORKDIR /app
 
 # Скопировать с локального компьютера файл зависимостей
 # в директорию /app.
-COPY requirements.txt .
+COPY backend/requirements.txt .
 
 RUN python3 -m pip install --upgrade pip
 
