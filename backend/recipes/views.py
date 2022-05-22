@@ -43,20 +43,19 @@ class RecipeViewSet(ModelViewSet):
     pagination_class = CustomPageNumberPaginator
 
     def perform_create(self, serializer):
-        serializer.save(author=self.request.user) 
-       
+        serializer.save(author=self.request.user)
+
     @action(
             methods=['post', 'delete'],
             detail=True,
             permission_classes=[IsAuthenticated]
             )
     def favorite(self, request, pk=None):
-        if request.method =='POST':
+        if request.method == 'POST':
             recipe = get_object_or_404(Recipe, pk=pk)
             Favorite.objects.create(user=request.user, recipe=recipe)
             serializer = RecipeInFollowSerializer(recipe)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-            
         favorite = Favorite.objects.filter(user=request.user, recipe=pk)
         favorite.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
@@ -67,16 +66,15 @@ class RecipeViewSet(ModelViewSet):
             permission_classes=[IsAuthenticated]
             )
     def shopping_cart(self, request, pk=None):
-        if request.method =='POST':
+        if request.method == 'POST':
             recipe = get_object_or_404(Recipe, pk=pk)
             ShoppingList.objects.create(user=request.user, recipe=recipe)
             serializer = RecipeInFollowSerializer(recipe)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-            
         favorite = ShoppingList.objects.filter(user=request.user, recipe=pk)
         favorite.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
-       
+
     @action(
         detail=False,
         methods=['GET'],
@@ -87,10 +85,6 @@ class RecipeViewSet(ModelViewSet):
         queryset = IngredientInRecipe.objects.filter(
             recipe__shopping_list__user=user
             )
-        print(IngredientInRecipe.recipe)
-        #print(IngredientInRecipe.recipe.shopping_list)
-
-        print(queryset)
         ingredients = queryset.values_list(
             'recipe__ingredients_amount__ingredient__name',
             'recipe__ingredients_amount__ingredient__measurement_unit',

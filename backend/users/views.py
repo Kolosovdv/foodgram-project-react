@@ -7,16 +7,10 @@ from rest_framework.response import Response
 from logic.paginations import CustomPageNumberPaginator
 from logic.permissions import AuthorOrAdminOrRead
 
-#from django.contrib.auth import get_user_model
 from .models import Subscription, User
 from .serializers import (CustomUserSerializer, SubscriptionGetSerializer,
                           SubscriptionPostSerializer)
 
-#User = get_user_model()
-#class CustomUserViewSet(UserViewSet):
-    #queryset = Tag.objects.all()
-    #serializer_class = 
-    
 
 class CustomUserViewSet(UserViewSet):
     queryset = User.objects.all()
@@ -36,9 +30,9 @@ class CustomUserViewSet(UserViewSet):
             context={'request': request}
         )
         return self.get_paginated_response(serializer.data)
-    
-    @action(methods=['post', 'delete'], 
-            detail=True, 
+
+    @action(methods=['post', 'delete'],
+            detail=True,
             permission_classes=[permissions.IsAuthenticated])
     def subscribe(self, request, id=None):
         author = get_object_or_404(User, id=id)

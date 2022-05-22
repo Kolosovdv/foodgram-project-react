@@ -30,20 +30,13 @@ class IngredientAdmin(admin.ModelAdmin):
 
 
 class RecipeAdmin(admin.ModelAdmin):
-    # Перечисляем поля, которые должны отображаться в админке
     inlines = (
         IngredientInRecipeInline,
     )
-    
-    list_display = ('id','name', 'author', 'text', 'cooking_time', 'image') 
-    # Добавляем интерфейс для поиска по тексту постов
+    list_display = ('id', 'name', 'author', 'text', 'cooking_time', 'image')
     search_fields = ('name',)
     list_filter = ('author', 'name', 'tags')
     exclude = ('ingredients',)
-    
-    # @staticmethod
-    # def favorite_count(obj):
-    #     return Favorite.objects.filter(recipe=obj).count()
 
 
 class FavoriteAdmin(admin.ModelAdmin):

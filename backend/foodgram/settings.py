@@ -4,26 +4,14 @@ import os
 from dotenv import load_dotenv
 
 load_dotenv()
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '6#00va*^87%lw60zz@9frf0m&x)a&_g76)wjpm0e(8!svrng3h'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-#DEBUG = True
 DEBUG = False
 
-#ALLOWED_HOSTS = []
 ALLOWED_HOSTS = ['62.84.115.146', '127.0.0.1', 'localhost']
-#ALLOWED_HOSTS = [*]
-
-
-# Application definition
 
 INSTALLED_APPS = [
     'logic.apps.LogicConfig',
@@ -82,7 +70,6 @@ DATABASES = {
         'PASSWORD': os.getenv('POSTGRES_PASSWORD', default='postgres'),
         'HOST': os.getenv('DB_HOST', default='db'),
         'PORT': os.getenv('DB_PORT', default='5432')
-        
     }
 }
 
@@ -132,7 +119,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated', 
+        'rest_framework.permissions.IsAuthenticated',
     ],
 
     'DEFAULT_AUTHENTICATION_CLASSES': [
@@ -143,10 +130,6 @@ AUTH_USER_MODEL = 'users.User'
 
 DJOSER = {
         'LOGIN_FIELD': 'email',
-        #'USER_ID_FIELD': 'id',
-        #"SEND_ACTIVATION_EMAIL": False, #что бы при регистрации не отправлялась почта для подтверждение EMAIL
-        #'HIDE_USERS': False, 
-
 }
 
 

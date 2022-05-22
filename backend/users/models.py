@@ -5,15 +5,13 @@ from django.utils.translation import gettext as _
 
 class User(AbstractUser):
     """Кастомная модель юзера."""
-    
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['username']
     email = models.EmailField(
         _('email address'),
         unique=True,
-    )   
-    #is_subscribed = models.BooleanField() № при запросе http://localhost/api/users/{id} возвращает булен, что Подписан ли текущий пользователь на этого 
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username']
-    
+    )
+
     class Meta:
         ordering = ('username',)
         verbose_name = 'Пользователь'
@@ -21,17 +19,15 @@ class User(AbstractUser):
 
     def __str__(self):
         return f'{self.email}, {self.username}'
-        
 
-class Subscription (models.Model): #написать вьюсет для обработки
-    #текущий пользователь
+
+class Subscription (models.Model):
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
         related_name='follower',
         verbose_name='Подписчик'
     )
-    #автор, на которого подписан текущий пользователь
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
@@ -40,5 +36,4 @@ class Subscription (models.Model): #написать вьюсет для обр�
     )
 
     class Meta:
-        ordering = ['user']
-# Create your models here.
+        ordering = ('user')

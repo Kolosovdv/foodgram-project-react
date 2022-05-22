@@ -1,4 +1,3 @@
-#from django.contrib.auth import get_user_model
 from djoser.serializers import UserSerializer
 from drf_extra_fields.fields import Base64ImageField
 from rest_framework import serializers
@@ -7,11 +6,9 @@ from recipes.models import Recipe
 
 from .models import Subscription, User
 
-
-FOLLOW_YOURSELF_ERROR_MESSAGE = 'Нельзя подписаться на себя! =)'
-FOLLOW_ERROR_MESSAGE = 'Вы уже подписаны на этого автора! =)'
-EMAIL_ERROR_MESSAGE = 'Такой адрес электронной почты уже зарегистрирован! =)'
-USERNAME_ERROR_MESSAGE = 'Такой логин уже зарегистрирован! =)'
+from foodgram.settings import (
+    FOLLOW_ERROR_MESSAGE,
+    FOLLOW_YOURSELF_ERROR_MESSAGE)
 
 
 class CustomUserSerializer(UserSerializer):
@@ -32,9 +29,9 @@ class CustomUserSerializer(UserSerializer):
     def get_is_subscribed(self, obj):
         """Статус подписки."""
         request = self.context.get('request')
-        if request is None or request.user.is_anonymous:
-            return False
-        return Subscription.objects.filter(user=request.user, author=obj.id).exists()
+        if request.user.is_authenticated:
+            return Subscription.objects.filter(
+                user=obj.user, author=obj.author).exists()
 
 
 class RecipeInSubscrioptionSerializer(serializers.ModelSerializer):
@@ -96,11 +93,9 @@ class SubscriptionGetSerializer(serializers.ModelSerializer):
     def get_is_subscribed(self, obj):
         """Статус подписки."""
         request = self.context.get('request')
-        if not request or request.user.is_anonymous:
-            return False
-        return Subscription.objects.filter(
-            user=obj.user, author=obj.author
-        ).exists()
+        if request.user.is_authenticated:
+            return Subscription.objects.filter(
+                user=obj.user, author=obj.author).exists()
 
     def get_recipes(self, obj):
         """Рецепты на странице подписок."""

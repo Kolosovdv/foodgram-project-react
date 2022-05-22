@@ -8,13 +8,10 @@ from users.serializers import CustomUserSerializer
 
 from .models import (Favorite, Ingredient, IngredientInRecipe, Recipe,
                      ShoppingList, Tag)
-
-IN_FAVORITE_MESSAGE = 'Этот рецепт уже в избранном! = )'
-IN_SHOPPING_LIST_MESSAGE = 'Этот рецепт уже в вашем списке покупок! = )'
-COOKING_TIME_MESSAGE = 'Время приготовления не может быть меньше 1-ой минуты!'
-INGREDIENT_AMOUNT_MESSAGE = 'Ингредиента не может быть меньше 0!'
-UNIQUE_INGREDIENT_MESSAGE = 'Ингредиенты не могут повторяться!'
-ADD_TAG_MESSAGE = 'Добавь тег!'
+from foodgram.settings import (
+    COOKING_TIME_MESSAGE, INGREDIENT_AMOUNT_MESSAGE,
+    UNIQUE_INGREDIENT_MESSAGE, ADD_TAG_MESSAGE
+    )
 
 
 class TagSerializer(serializers.ModelSerializer):
@@ -81,12 +78,10 @@ class RecipeSerializer(serializers.ModelSerializer):
 
     def get_is_favorited(self, obj):
         request = self.context.get('request')
-        if request is None or request.user.is_anonymous:
-            return False
-        return Favorite.objects.filter(
-            user=request.user,
-            recipe=obj
-            ).exists()
+        if request.user.is_authenticated:
+            return Favorite.objects.filter(
+                user=request.user,
+                recipe=obj).exists()
 
     def get_is_in_shopping_cart(self, obj):
         request = self.context.get('request')
@@ -146,4 +141,3 @@ class RecipeSerializer(serializers.ModelSerializer):
         instance.cooking_time = validated_data.get('cooking_time')
         instance.save()
         return instance
-   

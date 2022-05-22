@@ -13,16 +13,12 @@ class UserAdmin(admin.ModelAdmin):
     )
     search_fields = ('username', 'email',)
 
-class SubscriptionAdmin(admin.ModelAdmin):
-    # Перечисляем поля, которые должны отображаться в админке
-    list_display = ('user','author') 
-   
-    search_fields = ('user',) 
-   
-    #list_filter = ('pub_date',)
-    #
 
- 
+class SubscriptionAdmin(admin.ModelAdmin):
+    list_display = ('user', 'author')
+    search_fields = ('user',)
+    list_filter = ('pub_date',)
+
+
 admin.site.register(Subscription, SubscriptionAdmin)
 admin.site.register(User, UserAdmin)
-# Register your models here.

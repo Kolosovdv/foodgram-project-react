@@ -20,7 +20,6 @@ class Tag(models.Model):
     slug = models.SlugField(
         'Slug',
         unique=True,
-        max_length=50,
         help_text='Нужен уникальный слаг',
     )
 
