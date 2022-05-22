@@ -72,7 +72,6 @@ jobs:
         key: ${{ secrets.SSH_KEY }}
         passphrase: ${{ secrets.PASSPHRASE }}
         script: |
-            sudo docker pull kolosovdv/backend1:v1
             sudo docker-compose stop
             sudo docker-compose rm web
             touch .env
