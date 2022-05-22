@@ -17,5 +17,4 @@ RUN pip3 install -r requirements.txt --no-cache-dir
 # в директорию /app.
 COPY . .
 
-# Выполнить запуск сервера разработки при старте контейнера.
 CMD ["gunicorn", "foodgram.wsgi:application", "--bind", "0:8000" ] 
