@@ -2,13 +2,42 @@ FROM python:3.7-slim
 
 WORKDIR /app
 
-
-COPY backend/requirements.txt .
+COPY requirements.txt .
 
 RUN python3 -m pip install --upgrade pip
 
-RUN pip3 install -r requirements.txt --no-cache-dir
+RUN pip3 install -r backend/requirements.txt --no-cache-dir
 
 COPY . .
 
-CMD ["gunicorn", "foodgram.wsgi:application", "--bind", "0:8000" ] 
+CMD ["gunicorn", "foodgram.wsgi:application", "--bind", "0:8000" ]
+# FROM python:3.7-slim
+
+# COPY ./ /app
+
+# WORKDIR /app
+
+# COPY requirements.txt .
+
+# RUN pip3 install --upgrade pip && pip3 install -r /app/backend/requirements.txt --no-cache-dir
+
+# CMD gunicorn foodgram.wsgi:application --bind 0.0.0.0:8000 
+FROM python:3.7-slim
+
+# Запустить команду создания директории внутри контейнера
+RUN mkdir /app
+
+# Скопировать с локального компьютера файл зависимостей
+# в директорию /app.
+COPY requirements.txt /app
+
+# Выполнить установку зависимостей внутри контейнера.
+RUN pip3 install -r /app/requirements.txt --no-cache-dir
+
+# Скопировать содержимое директории /api_yamdb c локального компьютера
+# в директорию /app.
+#выйти вверх по парке и скопировать backend
+COPY ./ /app
+
+# Сделать директорию /app рабочей директорией. 
+WORKDIR /app 
