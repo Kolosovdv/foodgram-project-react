@@ -58,12 +58,6 @@ jobs:
             push: true
             tags: kolosovdv/backend1:latest
             
-        - name: Push to Docker Hub Frontend
-          uses: docker/build-push-action@v2
-          with:
-            file: frontend/Dockerfile
-            push: true
-            tags: kolosovdv/frontend:latest
           
   deploy:
     runs-on: ubuntu-latest
@@ -79,7 +73,6 @@ jobs:
         passphrase: ${{ secrets.PASSPHRASE }}
         script: |
             sudo docker pull kolosovdv/backend1:v1
-            sudo docker pull kolosovdv/frontend:latest
             sudo docker-compose stop
             sudo docker-compose rm web
             touch .env
