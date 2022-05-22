@@ -7,20 +7,22 @@ services:
       - ./.env
   
   frontend:
-    build:
-      context: ../frontend
-      dockerfile: Dockerfile
+    # build:
+    #   context: ../frontend
+    #   dockerfile: Dockerfile
+    image: kolosovdv/frontend:v1
+    restart: always
     volumes:
       - ../frontend/:/app/result_build/
     depends_on:
       - db 
   
   backend:
-    build:
-      context: ../backend
-      dockerfile: Dockerfile
-    # image: kolosovdv/back1:latest
-    # restart: always
+    # build:
+    #   context: ../backend
+    #   dockerfile: Dockerfile
+    image: kolosovdv/backend:v1
+    restart: always
     volumes:
       - static_value:/app/staticfiles/
       - media_value:/app/media/
