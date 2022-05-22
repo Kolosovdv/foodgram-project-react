@@ -8,8 +8,6 @@ COPY backend/requirements.txt .
 
 RUN python3 -m pip install --upgrade pip
 
-
-# Выполнить установку зависимостей внутри контейнера.
 RUN pip3 install -r requirements.txt --no-cache-dir
 
 COPY . .
