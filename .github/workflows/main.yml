@@ -70,7 +70,9 @@ jobs:
         key: ${{ secrets.SSH_KEY }}
         passphrase: ${{ secrets.PASSPHRASE }}
         script: |
-            
+         
+            sudo docker pull kolosovdv/backend:latest
+           
             sudo docker-compose stop
             sudo docker-compose rm backend
             touch .env
