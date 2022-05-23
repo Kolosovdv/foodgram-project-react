@@ -47,7 +47,6 @@ jobs:
           with:
             context: ./backend
             file: ./backend/Dockerfile
-            #file: backend/Dockerfile
             push: true
             tags: kolosovdv/backend:v1        
   deploy:
