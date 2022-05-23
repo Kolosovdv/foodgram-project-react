@@ -21,6 +21,7 @@ class User(AbstractUser):
         return f'{self.email}, {self.username}'
 
 
+
 class Subscription (models.Model):
     user = models.ForeignKey(
         User,
