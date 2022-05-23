@@ -5,22 +5,14 @@ services:
       - /var/lib/postgresql/data/
     env_file:
       - ./.env
-  
   frontend:
-    # build:
-    #   context: ../frontend
-    #   dockerfile: Dockerfile
     image: kolosovdv/frontend:v1
     restart: always
     volumes:
       - ../frontend/:/app/result_build/
     depends_on:
       - db 
-  
   backend:
-    # build:
-    #   context: ../backend
-    #   dockerfile: Dockerfile
     image: kolosovdv/backend:v1
     restart: always
     volumes:
