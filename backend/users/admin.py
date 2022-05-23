@@ -14,6 +14,7 @@ class UserAdmin(admin.ModelAdmin):
     search_fields = ('username', 'email',)
 
 
+
 class SubscriptionAdmin(admin.ModelAdmin):
     list_display = ('user', 'author')
     search_fields = ('user',)
