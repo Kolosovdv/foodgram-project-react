@@ -6,11 +6,7 @@ services:
     env_file:
       - ./.env
   frontend:
-    # image: kolosovdv/frontend:v1
-    # restart: always
-    build:
-      context: ../frontend
-      dockerfile: Dockerfile
+    image: kolosovdv/frontend:v1
     volumes:
       - ../frontend/:/app/result_build/
     depends_on:
@@ -42,3 +38,4 @@ volumes:
   static_value:
   media_value:
   postgres_data:
+  
