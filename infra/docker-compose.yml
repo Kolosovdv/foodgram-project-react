@@ -9,8 +9,7 @@ services:
   frontend:
     #image: kolosovdv/frontend:v1
     build:
-      ../frontend
-      
+      ../frontend  
     volumes:
       - ../frontend/:/app/result_build/
     depends_on:
