@@ -36,4 +36,4 @@ class Subscription (models.Model):
     )
 
     class Meta:
-        ordering = ('user')
+        ordering = ('user',)
