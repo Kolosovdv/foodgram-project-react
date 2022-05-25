@@ -10,7 +10,7 @@ services:
     #image: kolosovdv/frontend:v1
     build:
       ../frontend
-      #dockerfile: Dockerfile
+      
     volumes:
       - ../frontend/:/app/result_build/
     depends_on:
