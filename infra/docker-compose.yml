@@ -7,10 +7,10 @@ services:
     env_file:
       - ./.env
   frontend:
-    image: kolosovdv/frontend:v1
-    # build:
-    #   context: ../frontend
-    #   dockerfile: Dockerfile
+    #image: kolosovdv/frontend:v1
+    build:
+      ../frontend
+      #dockerfile: Dockerfile
     volumes:
       - ../frontend/:/app/result_build/
     depends_on:
