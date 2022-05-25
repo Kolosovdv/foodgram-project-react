@@ -8,8 +8,7 @@ services:
       - ./.env
   frontend:
     #image: kolosovdv/frontend:v1
-    build:
-      ../frontend  
+    build: ../frontend  
     volumes:
       - ../frontend/:/app/result_build/
     depends_on:
