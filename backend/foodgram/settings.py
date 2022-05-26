@@ -9,10 +9,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SECRET_KEY = '6#00va*^87%lw60zz@9frf0m&x)a&_g76)wjpm0e(8!svrng3h'
 
-DEBUG = False
-
-ALLOWED_HOSTS = ['62.84.115.146', '127.0.0.1', 'localhost']
-#ALLOWED_HOSTS = ['*']
+#DEBUG = False
+DEBUG = True
+#ALLOWED_HOSTS = ['62.84.115.146', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['*']
 INSTALLED_APPS = [
     'logic.apps.LogicConfig',
     'users.apps.UsersConfig',
