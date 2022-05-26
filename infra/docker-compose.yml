@@ -7,12 +7,15 @@ services:
     env_file:
       - ./.env
   frontend:
-    #image: kolosovdv/frontend:v1
-    build: ../frontend
-    volumes:
-      - ../frontend/:/app/result_build/
+    image: kolosovdv/frontend:v1
+    # build: ../frontend
+    # build:
+    #   context: ../frontend
+    #   dockerfile: Dockerfile
     depends_on:
-      - db 
+      - db
+    volumes:
+      - ../frontend/:/app/result_build/ 
   backend:
     image: kolosovdv/backend:v1
     restart: always
