@@ -30,8 +30,6 @@ class CustomUserSerializer(UserSerializer):
         """Статус подписки."""
         request = self.context.get('request')
         if request.user.is_authenticated:
-            # return Subscription.objects.filter(
-            #     user=obj.user, author=obj.author).exists()
             return Subscription.objects.filter(
                 user=request.user, author=obj.id).exists()
 
