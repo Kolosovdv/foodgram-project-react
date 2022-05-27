@@ -23,6 +23,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'rest_framework.authtoken',#подключение стандартной модели таблицы для поддержки токенов
+    'djoser',
 ]
 
 MIDDLEWARE = [
