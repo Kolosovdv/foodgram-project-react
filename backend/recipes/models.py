@@ -140,12 +140,13 @@ class IngredientInRecipe(models.Model):
         return f'{self.ingredient}'
 
 
+
 class Favorite(models.Model):
     """Класс избранного рецепта/автора."""
     recipe = models.ForeignKey(
         Recipe,
         on_delete=models.CASCADE,
-        related_name='favorites',
+        #related_name='favorites',
         verbose_name='Избранный рецепт'
     )
     user = models.ForeignKey(
