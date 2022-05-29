@@ -25,3 +25,5 @@ class Command(BaseCommand):
 # Если вы сохранили его как app/management/commands/load_questions.py, вы бы вызывали его как:
 
 # python manage.py load_questions --path /path/to/your/file.csv
+#https://reddeveloper.ru/questions/kakoi-samyi-prostoi-sposob-importirovat-fail-csv-v-model-django-dyavp?
+#C:\Dev\foodgram-project-react\backend\management\commands\importcsv.py
