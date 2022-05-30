@@ -6,10 +6,30 @@ from django.utils.translation import gettext as _
 class User(AbstractUser):
     """Кастомная модель юзера."""
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username']
+    REQUIRED_FIELDS = ('username', 'first_name', 'last_name')
+    #REQUIRED_FIELDS = ['username']
+    username = models.CharField(
+        verbose_name='Логин',
+        max_length=150,
+        null=False,
+        unique=True
+    )
     email = models.EmailField(
-        _('email address'),
+        max_length=254,
+        blank=True,
         unique=True,
+        null=False,
+        verbose_name='Адрес электронной почты'
+    )
+    first_name = models.CharField(
+        max_length=150,
+        blank=True,
+        verbose_name='Имя'
+    )
+    last_name = models.CharField(
+        max_length=150,
+        blank=True,
+        verbose_name='Фамилия'
     )
 
     class Meta:
@@ -18,7 +38,7 @@ class User(AbstractUser):
         verbose_name_plural = 'Пользователи'
 
     def __str__(self):
-        return f'{self.email}, {self.username}'
+        return f'{self.first_name}, {self.last_name}'
 
 
 class Subscription (models.Model):
