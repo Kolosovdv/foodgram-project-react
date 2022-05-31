@@ -82,41 +82,29 @@ class RecipeViewSet(ModelViewSet):
         permission_classes=[AuthorOrAdminOrRead]
         )
     def download_shopping_cart(self, request):
-        user = request.user
-        # queryset = IngredientInRecipe.objects.filter(
-        #     recipe__shopping_list__user=user
-        #     )
-        # ingredients = queryset.values_list(
-        #     'recipe__ingredients_amount__ingredient__name',
-        #     'recipe__ingredients_amount__ingredient__measurement_unit',
-        #     'recipe__ingredients_amount__amount'
-        # )
         ingredients = IngredientInRecipe.objects.filter(
-            recipe__shopping_list__user=user).values_list(
+            recipe__shopping_list__user=request.user).values_list(
             'ingredient__name', 'ingredient__measurement_unit').order_by(
                 'ingredient__name').annotate(ingredient_total=Sum('amount'))
-        #print(ingredients)
         text = 'Список покупок: \n'
         shoplist = {}
+        # for ingredients in ingredients:
+        #     name, measurement_unit, amount = ingredients
+        #     if name not in shoplist:
+        #         shoplist[name] = {
+        #             'единица измерения': measurement_unit,
+        #             'количество': amount
+        #         }
+        #     else:
+        #         shoplist[name]['amount'] += amount
         for ingredients in ingredients:
             name, measurement_unit, amount = ingredients
-            if name not in shoplist:
-                shoplist[name] = {
-                    'еденица измерения': measurement_unit,
+            shoplist[name] = {
+                    'единица измерения': measurement_unit,
                     'количество': amount
-                }
-            else:
-                shoplist[name]['amount'] += amount
-        text += f'{str(shoplist)}'
+                }    
+        text = f'{str(shoplist)}'
         response = HttpResponse(text, 'Content-Type: text/plane')
         response['Content-Disposition'] = 'attachment; filename="shoplist.txt"'
         return response
-    # def download(self, request):
-    #     """
-    #     Метод создания списка покупок.
-    #     """
-    #     result = IngredientRecipe.objects.filter(
-    #         recipe_carts__user=request.user).values(
-    #         'ingredient__name', 'ingredient__measurement_unit').order_by(
-    #             'ingredient__name').annotate(ingredient_total=Sum('amount'))
-    #     return self.canvas_method(result)
+  
