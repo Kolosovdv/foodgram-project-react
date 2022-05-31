@@ -99,11 +99,12 @@ class RecipeViewSet(ModelViewSet):
         #         shoplist[name]['amount'] += amount
         for ingredients in ingredients:
             name, measurement_unit, amount = ingredients
-            shoplist[name] = {
-                    'единица измерения': measurement_unit,
-                    'количество': amount
-                }    
-        text += f'{str(shoplist)}'
+            # shoplist[name] = {
+            #         'единица измерения': measurement_unit,
+            #         'количество': amount
+            #     }
+            text += f'({name}) = {amount} {measurement_unit}\n)'    
+        #text += f'{str(shoplist)}'
         response = HttpResponse(text, 'Content-Type: text/plane')
         response['Content-Disposition'] = 'attachment; filename="shoplist.txt"'
         return response
