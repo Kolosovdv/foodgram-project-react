@@ -103,7 +103,7 @@ class RecipeViewSet(ModelViewSet):
                     'единица измерения': measurement_unit,
                     'количество': amount
                 }    
-        text = f'{str(shoplist)}'
+        text += f'{str(shoplist)}'
         response = HttpResponse(text, 'Content-Type: text/plane')
         response['Content-Disposition'] = 'attachment; filename="shoplist.txt"'
         return response
