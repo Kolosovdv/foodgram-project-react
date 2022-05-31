@@ -1,5 +1,3 @@
-
-
 import os
 from dotenv import load_dotenv
 
@@ -12,9 +10,9 @@ print ("base dir path", BASE_DIR)
 SECRET_KEY = '6#00va*^87%lw60zz@9frf0m&x)a&_g76)wjpm0e(8!svrng3h'
 
 DEBUG = False
-#DEBUG = True
+
 ALLOWED_HOSTS = ['62.84.115.146', '127.0.0.1', 'localhost', 'backend']
-#ALLOWED_HOSTS = ['*']
+
 INSTALLED_APPS = [
     'logic.apps.LogicConfig',
     'users.apps.UsersConfig',
@@ -27,7 +25,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'rest_framework.authtoken',#подключение стандартной модели таблицы для поддержки токенов
+    'rest_framework.authtoken',
     'djoser',
 ]
 
@@ -62,12 +60,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'foodgram.wsgi.application'
 
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
 DATABASES = {
     'default': {
         'ENGINE': os.getenv('DB_ENGINE', default='django.db.backends.postgresql'),
@@ -97,9 +89,6 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-# Internationalization
-# https://docs.djangoproject.com/en/2.2/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
@@ -111,16 +100,11 @@ USE_L10N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.2/howto/static-files/
-
 STATIC_URL = '/staticfiles/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-
 
 
 REST_FRAMEWORK = {
@@ -139,9 +123,7 @@ AUTH_USER_MODEL = 'users.User'
 
 
 DJOSER = {
-    # 'SERIALIZERS': {
-    #     'user': 'users.serializers.CustomUserSerializer',
-    # },
+    
     'USER_ID_FIELD': 'id',
     'LOGIN_FIELD': 'email',
   

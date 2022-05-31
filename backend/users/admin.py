@@ -17,7 +17,6 @@ class UserAdmin(admin.ModelAdmin):
 class SubscriptionAdmin(admin.ModelAdmin):
     list_display = ('user', 'author')
     search_fields = ('user',)
-    #list_filter = ('pub_date',)
     list_filter = ('user',)
 
 

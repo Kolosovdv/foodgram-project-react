@@ -87,25 +87,9 @@ class RecipeViewSet(ModelViewSet):
             'ingredient__name', 'ingredient__measurement_unit').order_by(
                 'ingredient__name').annotate(ingredient_total=Sum('amount'))
         text = 'Список покупок: \n'
-        shoplist = {}
-        # for ingredients in ingredients:
-        #     name, measurement_unit, amount = ingredients
-        #     if name not in shoplist:
-        #         shoplist[name] = {
-        #             'единица измерения': measurement_unit,
-        #             'количество': amount
-        #         }
-        #     else:
-        #         shoplist[name]['amount'] += amount
         for ingredients in ingredients:
             name, measurement_unit, amount = ingredients
-            # shoplist[name] = {
-            #         'единица измерения': measurement_unit,
-            #         'количество': amount
-            #     }
             text += f'{name} = {amount} {measurement_unit}\n'    
-        #text += f'{str(shoplist)}'
         response = HttpResponse(text, 'Content-Type: text/plane')
         response['Content-Disposition'] = 'attachment; filename="shoplist.txt"'
         return response
-  
